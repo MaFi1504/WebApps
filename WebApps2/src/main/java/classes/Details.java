@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 //import javax.xml.bind.annotation.XmlRootElement;
 //
 //
@@ -21,43 +22,44 @@ import javax.persistence.Table;
 //@Entity
 //@Table(name = "tbl_Projekt")
 //@NamedQueries({
-//    @NamedQuery( name="projekt.findAll",
-//            query="SELECT p FROM Projekt p")
+//        @NamedQuery( name="projekt.findAll",
+//                query="SELECT p FROM Project p")
 //})
 
-public class Projekt implements Serializable {
+
+public class Details implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String titel;
-    
-    private String kurzbeschreibung;
-    
+
+    private String title;
+
+    private String description;
+
     private String logopath;
-    
-    private LocalDateTime startdatum;      //date-time without a time-zone in the ISO-8601
-                                           // such as  2022-04-25T10:15:30
 
-    
- 
-    public String getTitel() {
-        return titel;
+    private LocalDateTime startdate;      //date-time without a time-zone in the ISO-8601
+    // such as  2022-04-25T10:15:30
+
+
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getKurzbeschreibung() {
-        return kurzbeschreibung;
+    public String getDescription() {
+        return description;
     }
 
-    public void setKurzbeschreibung(String kurzbeschreibung) {
-        this.kurzbeschreibung = kurzbeschreibung;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLogopath() {
@@ -68,12 +70,12 @@ public class Projekt implements Serializable {
         this.logopath = logopath;
     }
 
-    public LocalDateTime getStartdatum() {
-        return startdatum;
+    public LocalDateTime getStartdate() {
+        return startdate;
     }
 
-    public void setStartdatum(LocalDateTime startdatum) {
-        this.startdatum = startdatum;
+    public void setStartdate(LocalDateTime startdate) {
+        this.startdate = startdate;
     }
 
     public Long getId() {
@@ -83,5 +85,5 @@ public class Projekt implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
 }

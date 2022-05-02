@@ -1,6 +1,8 @@
 package rest;
 
 import classes.Projekt;
+
+import java.awt.*;
 import java.io.Serializable;
 import java.net.URI;
 import javax.annotation.Resource;
@@ -47,8 +49,8 @@ public class ProjektResource implements Serializable {
     private UserTransaction utx;
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(PageAttributes.MediaType.APPLICATION_JSON)
+    @Produces(PageAttributes.MediaType.APPLICATION_JSON)
     public Response create(ProjektAdapter pa) {      
 
       try {
