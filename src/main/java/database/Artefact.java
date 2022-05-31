@@ -1,14 +1,18 @@
 package database;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 
+@XmlRootElement
+@Entity
+@Table(name = "artefact")
+@NamedQueries({
+        @NamedQuery(name = "artefact.getList", query = "SELECT a FROM Artefact a"),
+        @NamedQuery(name = "artefact.getById", query = "SELECT a FROM Artefact a WHERE a.id = :id"),
+        @NamedQuery(name = "artefact.getByTitle", query = "SELECT a FROM Artefact a WHERE a.title = :title")
+
+})
 public class Artefact implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,8 +20,11 @@ public class Artefact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
+    @Column(name = "planned_work_time")
     private String plannedWorkTime;
 
     public String getTitle() {
@@ -50,101 +57,5 @@ public class Artefact implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void addToDatabase() {
-        Connection conn = Database.getDBConnection();
-        try {
-            Statement statement = conn.createStatement();
-            this.id = statement.executeUpdate(
-                    "INSERT INTO artefact (title, description, planned_work_time) " +
-                            "VALUES ('" + title + "', '" + description + "', '" + plannedWorkTime + "') " +
-                            "RETURNING id");
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Artefact getArtefactById(int id) {
-        Connection conn = Database.getDBConnection();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM artefact WHERE id = " + id);
-            if (rs.next()) {
-                return RSToArtefact(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static Artefact getArtefactByTitle(String title) {
-        Connection conn = Database.getDBConnection();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM artefact WHERE title = '" + title + "'");
-            if (rs.next()) {
-                return RSToArtefact(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static ArrayList<Artefact> getArtefactsByUserId(int userId) {
-        Connection conn = Database.getDBConnection();
-        ArrayList<Artefact> artefacts = new ArrayList<>();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM artefact WHERE user_id = " + userId);
-            while (rs.next()) {
-                artefacts.add(RSToArtefact(rs));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return artefacts;   //returns null if no artefacts found
-    }
-
-    public static ArrayList<Artefact> getArtefactsByProjectId(int projectId) {
-        Connection conn = Database.getDBConnection();
-        ArrayList<Artefact> artefacts = new ArrayList<>();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM artefact WHERE id IN " +
-                    "(SELECT artefact_id FROM project_artefact WHERE project_id = " + projectId + ")");
-            while (rs.next()) {
-                artefacts.add(RSToArtefact(rs));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return artefacts;
-    }
-
-    public static ArrayList<Artefact> getList() {
-        Connection conn = Database.getDBConnection();
-        ArrayList<Artefact> artefacts = new ArrayList<>();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM artefact");
-            while (rs.next()) {
-                artefacts.add(RSToArtefact(rs));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return artefacts;
-    }
-
-    private static Artefact RSToArtefact(ResultSet rs) {
-        Artefact artefact = new Artefact();
-        try {
-            artefact.setId(rs.getInt("id"));
-            artefact.setTitle(rs.getString("title"));
-            artefact.setDescription(rs.getString("description"));
-            artefact.setPlannedWorkTime(rs.getString("planned_work_time"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return artefact;
     }
 }

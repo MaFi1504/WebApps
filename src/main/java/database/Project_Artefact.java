@@ -1,10 +1,13 @@
 package database;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
+@XmlRootElement
+@Entity
+@Table(name = "project_artefact")
 public class Project_Artefact implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,12 +15,13 @@ public class Project_Artefact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String worktime;
+    @Column(name = "work_time")
+    private String work_time;
 
-    public String getWorktime() {return worktime;}
+    public String getWork_time() {return work_time;}
 
-    public void setWorktime(String worktime){
-        this.worktime = worktime;
+    public void setWork_time(String work_time){
+        this.work_time = work_time;
     }
 
     public int getId() {

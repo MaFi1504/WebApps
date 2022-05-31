@@ -1,15 +1,19 @@
 package database;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
+@XmlRootElement
+@Entity
+@Table(name = "Task_group")
+@NamedQueries({
+        @NamedQuery(name = "Task_group.getAll", query = "SELECT t FROM TaskGroup t")
+})
 public class TaskGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,7 +21,9 @@ public class TaskGroup implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
 
 

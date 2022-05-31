@@ -1,19 +1,38 @@
 package rest;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.*;
+import javax.transaction.NotSupportedException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import database.Project;
 import database.ProjectAdapter;
 
+import java.net.URI;
 import java.util.ArrayList;
 
+@Stateless
+@TransactionManagement(TransactionManagementType.BEAN)
 @Path("/project")
 public class ProjectResource {
+
+    @PersistenceContext(unitName = "ProjectPU")
+    private EntityManager em;
+
+    @Resource
+    private UserTransaction utx;
 
     @GET
     @Produces("application/json")
     public Response get() {
-        Response.ResponseBuilder builder = Response.ok(Project.getList());
+        ArrayList<Project> projects;
+        projects = (ArrayList<Project>) em.createNamedQuery("project.getList").getResultList();
+        Response.ResponseBuilder builder = Response.ok(projects);
         return builder.build();
     }
 
@@ -21,7 +40,8 @@ public class ProjectResource {
     @GET
     @Produces("application/json")
     public Response getSpecific(@PathParam("id") int id) {
-        Response.ResponseBuilder builder = Response.ok(Project.getProjectById(id));
+        Project proj = em.find(Project.class, id);
+        Response.ResponseBuilder builder = Response.ok(proj);
         return builder.build();
     }
 
@@ -29,7 +49,8 @@ public class ProjectResource {
     @GET
     @Produces("application/json")
     public Response getName(@PathParam("title") String title) {
-        Response.ResponseBuilder builder = Response.ok(Project.getProjectByTitle(title));
+        Project proj = em.find(Project.class, title);
+        Response.ResponseBuilder builder = Response.ok(proj);
         return builder.build();
     }
 
@@ -37,9 +58,38 @@ public class ProjectResource {
     @Consumes("application/json")
     @Produces("application/json")
     public Response post(ProjectAdapter pa) {
-        Project proj = pa.toProject();
-        proj.addToDatabase();
-        Response.ResponseBuilder rb = Response.ok(proj);
-        return rb.build();
+        try {
+            utx.begin();
+            Project proj = pa.toProject();
+            em.persist(proj);
+            utx.commit();
+
+            URI location = URI.create("/project/id/" + proj.getId());
+
+            Response.ResponseBuilder rb = Response.created(location);
+            URI delLocLink = URI.create("/project/delete?id=" + proj.getId());
+            rb.link(delLocLink, "delete");
+            return rb.build();
+        } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+    @Path("/delete")
+    @DELETE
+    @Produces("application/json")
+    public Response delete(@QueryParam("id") int id) {
+        try {
+            utx.begin();
+            Project proj = em.find(Project.class, id);
+            em.remove(proj);
+            utx.commit();
+            return Response.ok().build();
+        } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

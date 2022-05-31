@@ -1,16 +1,18 @@
 package database;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
+@XmlRootElement
+@Entity
+@Table(name = "project")
+@NamedQueries({
+        @NamedQuery(name = "project.getList", query = "SELECT p FROM Project p"),
+        @NamedQuery(name = "project.getSpecific", query = "SELECT p FROM Project p WHERE p.id = :id"),
+        @NamedQuery(name = "project.getTitle", query = "SELECT p FROM Project p WHERE p.title = :title"),
+})
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,9 +20,13 @@ public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
+    @Column(name = "logo_path")
     private String logoPath;
+    @Column(name = "start_date")
     private LocalDateTime startDate;
     
 
@@ -62,70 +68,5 @@ public class Project implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void addToDatabase() {
-        Connection conn = Database.getDBConnection();
-        try {
-            Statement statement = conn.createStatement();
-            this.id = statement.executeUpdate(
-                    "INSERT INTO project (title, description, logo_path, start_date) " +
-                            "VALUES ('" + title + "', '" + description + "', '" + logoPath + "', '" + startDate + "') " +
-                            "RETURNING id");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static Project getProjectById(int id) {
-        Connection conn = Database.getDBConnection();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM project WHERE id = " + id);
-            if (rs.next()) {
-                return RSToProject(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static Project getProjectByTitle(String title) {
-        Connection conn = Database.getDBConnection();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM project WHERE title = '" + title + "'");
-            if (rs.next()) {
-                return RSToProject(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static ArrayList<Project> getList() {
-        Connection conn = Database.getDBConnection();
-        ArrayList<Project> projects = new ArrayList<>();
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM project");
-            while(rs.next()) {
-                projects.add(RSToProject(rs));
-            }
-        } catch (SQLException e) {
-                    throw new RuntimeException(e);
-        }
-        return projects;
-    }
-
-    private static Project RSToProject(ResultSet rs) throws SQLException {
-        Project project = new Project();
-        project.id = rs.getInt("id");
-        project.title = rs.getString("title");
-        project.description = rs.getString("description");
-        project.logoPath = rs.getString("logo_path");
-        project.startDate = rs.getTimestamp("start_date").toLocalDateTime();
-        return project;
     }
 }

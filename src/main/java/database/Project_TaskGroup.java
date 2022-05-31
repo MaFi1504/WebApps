@@ -1,10 +1,14 @@
 package database;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+
+@XmlRootElement
+@Entity
+@Table(name = "project_taskgroup")
 public class Project_TaskGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,25 +16,12 @@ public class Project_TaskGroup implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int ProjectId;
-    private int TaskGroupId;
-
-    public int getProjectId() {
-        return ProjectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.ProjectId = ProjectId;
-    }
-
-    public int getTaskGroupId() {
-        return TaskGroupId;
-    }
-
-    public void setTaskGroupId(long taskGroupId) {
-        this.TaskGroupId = TaskGroupId;
-    }
-
+    @Column(name = "project_id")
+    @OneToMany()
+    private Collection<Project> ProjectId;
+    @Column(name = "taskgroup_id")
+    @OneToMany()
+    private Collection<TaskGroup> TaskGroupId;
 
     public int getId() {
         return id;
