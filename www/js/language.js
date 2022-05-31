@@ -372,7 +372,228 @@ var languages = [
         Japanese: "新規プロジェクト",
         Korean: "새 프로젝트",
         Russian: "Новый проект"
-    }
+    },
+    {
+        German: "Start Datum",
+        English: "Start date",
+        Spanish: "Fecha de inicio",
+        French: "Date de début",
+        Italian: "Data di inizio",
+        Chinese: "开始日期",
+        Japanese: "開始日", 
+        Korean: "시작 날짜",
+        Russian: "Дата начала"
+    },
+    {
+        German: "End Datum",
+        English: "End date",
+        Spanish: "Fecha de finalización",
+        French: "Date de fin",
+        Italian: "Data di fine",
+        Chinese: "结束日期",
+        Japanese: "終了日",
+        Korean: "종료 날짜",
+        Russian: "Дата окончания"
+    },
+    {
+        German: "Projekt Logo",
+        English: "Project logo",
+        Spanish: "Logo del proyecto",
+        French: "Logo du projet",
+        Italian: "Logo del progetto",
+        Chinese: "项目标志",
+        Japanese: "プロジェクトのロゴ",
+        Korean: "프로젝트 로고",
+        Russian: "Логотип проекта"
+    },
+    {
+        German: "Projekt Name",
+        English: "Project name",
+        Spanish: "Nombre del proyecto",
+        French: "Nom du projet",
+        Italian: "Nome del progetto",
+        Chinese: "项目名称",
+        Japanese: "プロジェクト名",
+        Korean: "프로젝트 이름",
+        Russian: "Название проекта"
+    },
+    {
+        German: "Projekt Beschreibung",
+        English: "Project description",
+        Spanish: "Descripción del proyecto",
+        French: "Description du projet",
+        Italian: "Descrizione del progetto",
+        Chinese: "项目描述",
+        Japanese: "プロジェクトの説明",
+        Korean: "프로젝트 설명",
+        Russian: "Описание проекта"
+    },
+    {
+        German: "Projekt Leiter",
+        English: "Project leader",
+        Spanish: "Líder del proyecto",
+        French: "Chef du projet",
+        Italian: "Leader del progetto",
+        Chinese: "项目领导",
+        Japanese: "プロジェクトリーダー",
+        Korean: "프로젝트 리더",
+        Russian: "Руководитель проекта"
+    },
+    {
+        German: "Projekt Team",
+        English: "Project team",
+        Spanish: "Equipo del proyecto",
+        French: "Équipe du projet",
+        Italian: "Team del progetto",
+        Chinese: "项目团队",
+        Japanese: "プロジェクトチーム",
+        Korean: "프로젝트 팀",
+        Russian: "Команда проекта"
+    },
+    {
+        German: "Projekt Teammitglieder",
+        English: "Project team members",
+        Spanish: "Miembros del equipo del proyecto",
+        French: "Membres de l'équipe du projet",
+        Italian: "Membri del team del progetto",
+        Chinese: "项目团队成员",
+        Japanese: "プロジェクトチームメンバー",
+        Korean: "프로젝트 팀 멤버",
+        Russian: "Участники проекта"
+    },
+    {
+        German: "Projekt Ziele",
+        English: "Project goals",
+        Spanish: "Objetivos del proyecto",
+        French: "Objectifs du projet",
+        Italian: "Obiettivi del progetto",
+        Chinese: "项目目标",
+        Japanese: "プロジェクト目標",
+        Korean: "프로젝트 목표",
+        Russian: "Цели проекта"
+    },
+    {
+        German: "Projekt Ziel",
+        English: "Project goal",
+        Spanish: "Objetivo del proyecto",
+        French: "Objectif du projet",
+        Italian: "Obiettivo del progetto",
+        Chinese: "项目目标",
+        Japanese: "プロジェクト目標",
+        Korean: "프로젝트 목표",
+        Russian: "Цель проекта"
+    },
+    {
+        German: "Projekt Zielbeschreibung",
+        English: "Project goal description",
+        Spanish: "Descripción del objetivo del proyecto",
+        French: "Description de l'objectif du projet",
+        Italian: "Descrizione dell'obiettivo del progetto",
+        Chinese: "项目目标描述",
+        Japanese: "プロジェクト目標の説明",
+        Korean: "프로젝트 목표 설명",
+        Russian: "Описание цели проекта"
+    },
+    {
+        German: "Projekt Titel",
+        English: "Project title",
+        Spanish: "Título del proyecto",
+        French: "Titre du projet",
+        Italian: "Titolo del progetto",
+        Chinese: "项目标题",
+        Japanese: "プロジェクトのタイトル",
+        Korean: "프로젝트 제목",
+        Russian: "Название проекта"
+    },
+    {
+        German: "Benutzername",
+        English: "Username",
+        Spanish: "Nombre de usuario",
+        French: "Nom d'utilisateur",
+        Italian: "Nome utente",
+        Chinese: "用户名",
+        Japanese: "ユーザー名",
+        Korean: "사용자 이름",
+        Russian: "Имя пользователя"
+    },
+    {
+        German: "Passwort",
+        English: "Password",
+        Spanish: "Contraseña",
+        French: "Mot de passe",
+        Italian: "Password",
+        Chinese: "密码",
+        Japanese: "パスワード",
+        Korean: "비밀번호",
+        Russian: "Пароль"
+    },
+    {
+        German: "Passwort wiederholen",
+        English: "Repeat password",
+        Spanish: "Repetir contraseña",
+        French: "Répéter le mot de passe",
+        Italian: "Ripeti password",
+        Chinese: "重复密码",
+        Japanese: "パスワードを再入力",
+        Korean: "비밀번호 확인",
+        Russian: "Повторите пароль"
+    },
+    {
+        German: "E-Mail",
+        English: "E-Mail",
+        Spanish: "Correo electrónico",
+        French: "E-mail",
+        Italian: "E-mail",
+        Chinese: "电子邮件",
+        Japanese: "メール",
+        Korean: "이메일",
+        Russian: "Электронная почта"
+    },
+    {
+        German: "E-Mail wiederholen",
+        English: "Repeat E-Mail",
+        Spanish: "Repetir correo electrónico",
+        French: "Répéter l'adresse e-mail",
+        Italian: "Ripeti e-mail",
+        Chinese: "重复电子邮件",
+        Japanese: "メールを再入力",
+        Korean: "이메일 확인",
+        Russian: "Повторите почту"
+    },
+    {
+        German: "Vorname",
+        English: "First name",
+        Spanish: "Nombre",
+        French: "Prénom",
+        Italian: "Nome",
+        Chinese: "名",
+        Japanese: "名",
+        Korean: "이름",
+        Russian: "Имя"
+    },
+    {
+        German: "Nachname",
+        English: "Last name",
+        Spanish: "Apellido",
+        French: "Nom",
+        Italian: "Cognome",
+        Chinese: "姓",
+        Japanese: "姓",
+        Korean: "성",
+        Russian: "Фамилия"
+    },
+    {
+        German: "Registrieren",
+        English: "Register",
+        Spanish: "Registrarse",
+        French: "S'inscrire",
+        Italian: "Registrati",
+        Chinese: "注册",
+        Japanese: "登録",
+        Korean: "등록",
+        Russian: "Зарегистрироваться"
+    },
+
 ];
 
 var countryCodesArray = [
