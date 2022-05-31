@@ -1,0 +1,43 @@
+.sidebar {
+    color: #aaaaaa;
+    background-color: #2b2b2b;
+    width: 200px;
+    height: 100%;
+    padding: 20px;
+    border: #ffffff;
+    border-width: 2px;
+    border-style: solid;
+}
+
+ul {
+    padding-left: 0px;
+    margin-top: 0;
+}
+
+h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
+}
+
+.menu-btn {
+    width: 100%;
+}
+
+.textarea {
+    background-color: #8a8a8a;
+    width: 40vw;
+    border: #777777;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.textarea:focus{
+    background-color: #ffffff;
+}
+
+.second-header {
+    position: sticky;
+    top: 60px;
+}

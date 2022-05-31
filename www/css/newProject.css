@@ -1,0 +1,27 @@
+.form-control {
+    background-color: #8a8a8a;
+    color: #e0e0e0;
+    text-align: center;
+    width: 40vw;
+    border: #777777;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 15px;
+}
+
+.placeholder {
+    padding-top: 20px;
+}
+
+#projectTitle {
+    font-size: 24px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input[type=text]{
+    font-size: 16px;
+}
+
+::placeholder {
+    color: #e0e0e0;
+}

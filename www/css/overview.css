@@ -1,0 +1,32 @@
+.text{
+    color: rgb(5, 5, 5);
+   background-color: #d1caca;
+   width: fit-content;
+   padding: 5px;
+}
+.text-size{
+    font-size: 150%;
+}
+.fade-in-text-hover {
+    opacity: 10%;
+  }
+  
+  .fade-in-text-hover:hover {
+    opacity:100%;
+    transition:opacity 2s
+  }
+  .filter {
+    opacity: 100%;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
