@@ -1,3 +1,5 @@
+const api = "http://localhost:8080/api-v1/";
+
 class Project{
 
     constructor(title, shortDescription, image, startDate){
