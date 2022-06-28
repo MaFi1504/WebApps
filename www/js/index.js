@@ -1,12 +1,15 @@
-const api = "http://localhost:8080/api-v1/";
+const api = "http://localhost:8080/WebApps-1.0/api/";
 
 class Project{
 
-    constructor(title, shortDescription, image, startDate){
+    constructor(title, startDate, endDate, shortDescription, longDescription, goals, image){
         this.title = title;
-        this.shortDescription = shortDescription;
-        this.image = image;
         this.startDate = startDate;
+        this.endDate = endDate;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.goals = goals;
+        this.image = image;
     }
 
     calculateProjectTime(){

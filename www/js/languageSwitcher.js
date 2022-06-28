@@ -30,7 +30,7 @@ var mlr = function({
         mbPOCControlsLangDrop.addEventListener("change", function(e) {
             mlrLangInUse = mbPOCControlsLangDrop[mbPOCControlsLangDrop.selectedIndex].value;
             resolveAllMLStrings();
-            setCookie("mlrLangInUse=", mlrLangInUse, 365);
+            setCookie(mlrLangInUse);
             // Here we update the 2-digit lang attribute if required
             if (countryCodes === true) {
                 if (!Array.isArray(countryCodeData) || !countryCodeData.length) {
@@ -71,38 +71,24 @@ function resolveMLString(stringToBeResolved, mLstrings) {
     }
 }
 
-function setCookie(cName, cValue, expDays) {
-    console.log("Setting cookie: " + cName + " to " + cValue);
-    let date = new Date();
-    date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+function setCookie(cValue) {
+    localStorage.setItem("lang", cValue);
 }
 
 BrowserLanguage = navigator.language.split("-")[0];
 console.log(BrowserLanguage);
 BrowserLanguageLong = countryCodesArray.find(this2Digit => this2Digit.code === BrowserLanguage);
-console.log(BrowserLanguageLong);
 
-cookies = document.cookie;
-console.log(cookies);
-if (cookies != "") {
-    forEach(cookies, function(cookie) {
-        var parts = cookie.split("=");
-        var name = parts[0].trim();
-        var value = parts[1].trim();
-        if (name === "mlrLangInUse") {
-            mlrLangInUse = value;
-        }
-    });
+lang = localStorage.getItem("lang") || "";
+if (lang != "") {
+    mlrLangInUse = lang;
 }
 console.log(mlrLangInUse);
 
 if (mlrLangInUse === undefined) {
     mlrLangInUse = BrowserLanguageLong.name;
-    setCookie("mlrLangInUse=", BrowserLanguageLong.name, 365);
+    setCookie(BrowserLanguageLong.name);
 }
-console.log(mlrLangInUse);
 
 
 mlr({
